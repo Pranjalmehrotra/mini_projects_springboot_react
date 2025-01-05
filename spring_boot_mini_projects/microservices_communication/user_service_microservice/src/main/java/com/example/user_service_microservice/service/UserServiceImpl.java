@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User id doesnot exists"));
 		userEntity.setUserSummary(userModel.getUserSummary());
-		userEntity.setUserEmail(userEntity.getUserEmail());
+		userEntity.setUserEmail(userModel.getUserEmail());
 		userRepository.save(userEntity);
 		return entityToModelMapper(userEntity);
 	}

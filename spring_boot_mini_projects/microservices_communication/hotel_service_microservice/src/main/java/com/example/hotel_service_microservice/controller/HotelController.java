@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.hotel_service_microservice.model.HotelCommonResponse;
 import com.example.hotel_service_microservice.model.HotelModel;
@@ -17,8 +19,8 @@ public class HotelController {
 	@Autowired
 	private HotelService hotelService;
 	
-	@PostMapping("/create-new-hotel")
-	public ResponseEntity<HotelCommonResponse> createNewHotel(HotelModel hotelModel) {
+	@PostMapping("/register-new-hotel")
+	public ResponseEntity<HotelCommonResponse> createNewHotel(@RequestBody HotelModel hotelModel) {
 		HotelCommonResponse createNewHotelResponse = new HotelCommonResponse();
 		try {
 			if (!ObjectUtils.isEmpty(hotelModel)) {
@@ -41,8 +43,9 @@ public class HotelController {
 
 	}
 
-	@PostMapping(value = "/update-hotel/{hotelId}")
-	public ResponseEntity<HotelCommonResponse> updateHotelInfo(HotelModel hotelModel, @PathVariable("hotelId")Long hotelId) {
+	//@PostMapping(value = "/update-hotel/{hotelId}")
+	@PatchMapping(value = "/update-hotel/{hotelId}")
+	public ResponseEntity<HotelCommonResponse> updateHotelInfo(@RequestBody HotelModel hotelModel, @PathVariable("hotelId")Long hotelId) {
 		HotelCommonResponse updatingHotelResponse = new HotelCommonResponse();
 		try {
 			if (!ObjectUtils.isEmpty(hotelModel)) {
@@ -71,12 +74,12 @@ public class HotelController {
 		try {
 			hotelService.deleteHotel(hotelId);
 			deletingHotelResponse.setStatusCode("200");
-			deletingHotelResponse.setResponseMessage("User deleted successfully");
+			deletingHotelResponse.setResponseMessage("Hotel deleted successfully");
 			deletingHotelResponse.setResponseData("Deletion occurs");
 
 		} catch (Exception e) {
 			deletingHotelResponse.setStatusCode("500");
-			deletingHotelResponse.setResponseMessage("Exception in deleting the user details!!");
+			deletingHotelResponse.setResponseMessage("Exception in deleting the hotel details!!");
 			deletingHotelResponse.setResponseData(e);
 		}
 		return ResponseEntity.ok(deletingHotelResponse);
@@ -101,7 +104,7 @@ public class HotelController {
 
 	}
 	
-	@GetMapping(value = "/get-user/{hotelId}")
+	@GetMapping(value = "/get-hotel/{hotelId}")
 	public ResponseEntity<HotelCommonResponse> singleUserByUserId(@PathVariable("hotelId")Long hotelId) {
 		HotelCommonResponse hotelListResponse = new HotelCommonResponse();
 		try {

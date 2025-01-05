@@ -3,11 +3,16 @@ package com.example.user_service_microservice.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserModel {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class UserModel {
+	@JsonProperty("userEmail")
 	private String userEmail;
+	@JsonProperty("userSummary")
 	private String userSummary;
+	@JsonProperty("userFirstName")
 	private String userFirstName;
+	@JsonProperty("userLastName")
 	private String userLastName;
 	private List<UserRatingModel> userRating = new ArrayList<>();
 
@@ -62,6 +67,12 @@ public class UserModel {
 
 	public void setUserRating(List<UserRatingModel> userRating) {
 		this.userRating = userRating;
+	}
+
+	@Override
+	public String toString() {
+		return "UserModel [userEmail=" + userEmail + ", userSummary=" + userSummary + ", userFirstName=" + userFirstName
+				+ ", userLastName=" + userLastName + ", userRating=" + userRating + "]";
 	}
 
 }

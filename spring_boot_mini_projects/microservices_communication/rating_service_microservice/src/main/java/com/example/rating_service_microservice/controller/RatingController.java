@@ -7,6 +7,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.rating_service_microservice.model.RatingCommonResponse;
 import com.example.rating_service_microservice.model.RatingModel;
@@ -18,8 +19,8 @@ public class RatingController {
 	@Autowired
 	RatingService ratingService;
 
-	@PostMapping("/create-rating")
-	public ResponseEntity<RatingCommonResponse> createNewHotel(RatingModel ratingModel) {
+	@PostMapping("/register-new-rating")
+	public ResponseEntity<RatingCommonResponse> createNewHotel(@RequestBody RatingModel ratingModel) {
 		RatingCommonResponse createNewRatingResponse = new RatingCommonResponse();
 		try {
 			if (!ObjectUtils.isEmpty(ratingModel)) {

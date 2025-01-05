@@ -1,7 +1,5 @@
 package com.example.hotel_service_microservice.model;
 
-import jakarta.persistence.Column;
-
 public class HotelModel {
 
 	private String hotelName;

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.user_service_microservice.model.UserCommonResponse;
 import com.example.user_service_microservice.model.UserModel;
@@ -20,10 +22,13 @@ public class UserControllerMicroservices {
 
 	// @RequestMapping(value ="/register-new-user",method = RequestMethod.POST)
 	@PostMapping(value = "/register-new-user")
-	public ResponseEntity<UserCommonResponse> createNewUser(UserModel userModel) {
+	public ResponseEntity<UserCommonResponse> createNewUser(@RequestBody UserModel userModel) {
 		UserCommonResponse createNewUserResponse = new UserCommonResponse();
 		try {
+			System.out.println("The userModel is ::" + userModel.toString());
+
 			if (!ObjectUtils.isEmpty(userModel)) {
+				System.out.println("The userModel is ::" + userModel.toString());
 				UserModel newUserModel = userService.addNewUser(userModel);
 				createNewUserResponse.setStatusCode("201");
 				createNewUserResponse.setResponseMessage("User Created Successfully");
@@ -43,8 +48,9 @@ public class UserControllerMicroservices {
 
 	}
 
-	@PostMapping(value = "/update-user/{userId}")
-	public ResponseEntity<UserCommonResponse> updateUser(UserModel userModel, @PathVariable("userId") Long userId) {
+	//@PostMapping(value = "/update-user/{userId}")
+	@PatchMapping(value = "/update-user/{userId}")
+	public ResponseEntity<UserCommonResponse> updateUser(@RequestBody UserModel userModel, @PathVariable("userId") Long userId) {
 		UserCommonResponse updatingUserResponse = new UserCommonResponse();
 		try {
 			if (!ObjectUtils.isEmpty(userModel)) {
