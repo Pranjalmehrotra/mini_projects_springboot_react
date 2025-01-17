@@ -1,18 +1,21 @@
 package com.example.rating_service_microservice.service;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.rating_service_microservice.entity.RatingEntity;
-import com.example.rating_service_microservice.exception.HotelNotFoundException;
+import com.example.rating_service_microservice.exception.RatingNotFoundException;
 import com.example.rating_service_microservice.model.RatingModel;
 import com.example.rating_service_microservice.repository.RatingRepository;
 
 @Service
 public class RatingServiceImpl implements RatingService {
-
+	
+	private  Logger ratingLogger =  
+           LoggerFactory.getLogger(RatingServiceImpl.class);
+	
 	@Autowired
 	RatingRepository ratingRepository;
 
@@ -32,17 +35,26 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public RatingModel getRatingByUserId(Long userId) {
-		RatingEntity ratingEntity = ratingRepository.findById(userId).orElseThrow(()->new HotelNotFoundException("Hotel id not found"));
-		RatingModel ratingModelFound = entityToModelMapper(ratingEntity);
-		return ratingModelFound;
+	public List<RatingModel> getRatingByUserId(Long userId) {
+		ratingLogger.info("The user id is {}", userId);
+		List<RatingEntity> ratingEntityList = ratingRepository.findRatingEntityByUserId(userId)
+				.orElseThrow(() -> new RatingNotFoundException("Hotel id not found"));
+		List<RatingModel> ratingModelFoundList = ratingEntityList.stream().map((ratingEntity) -> {
+			return entityToModelMapper(ratingEntity);
+		}).collect(Collectors.toList());
+		return ratingModelFoundList;
 	}
 
 	@Override
-	public RatingModel getRatinngByHotelId(Long hotelId) {
-		RatingEntity ratingEntity = ratingRepository.findById(hotelId).orElseThrow(()->new HotelNotFoundException("Hotel id not found"));
-		RatingModel ratingModelFound = entityToModelMapper(ratingEntity);
-		return ratingModelFound;
+	public List<RatingModel> getRatinngByHotelId(Long hotelId) {
+		ratingLogger.info("The hotel id is {}", hotelId);
+		List<RatingEntity> ratingEntityList = ratingRepository.findRatingEntityByHotelId(hotelId)
+				.orElseThrow(() -> new RatingNotFoundException("Hotel id not found"));
+		System.out.println("Rating entity is ::" + ratingEntityList);
+		List<RatingModel> ratingModelFoundList = ratingEntityList.stream().map((ratingEntity) -> {
+			return entityToModelMapper(ratingEntity);
+		}).collect(Collectors.toList());
+		return ratingModelFoundList;
 	}
 
 	private RatingEntity modelToEntityMapper(RatingModel ratingModel) {

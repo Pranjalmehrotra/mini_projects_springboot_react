@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.rating_service_microservice.model.RatingCommonResponse;
 import com.example.rating_service_microservice.model.RatingModel;
@@ -53,44 +54,48 @@ public class RatingController {
 			hotelListResponse.setResponseData(ratingModelList);
 		} catch (Exception e) {
 			hotelListResponse.setStatusCode("500");
-			hotelListResponse.setResponseMessage("Exception in creating the user!!");
+			hotelListResponse.setResponseMessage("Exception in getting the user details!!");
 			hotelListResponse.setResponseData(e);
 		}
 		return ResponseEntity.ok(hotelListResponse);
 
 	}
 
-	@GetMapping(value = "/get-rating/{hotelId}")
-	public ResponseEntity<RatingCommonResponse> getSingleRatingByHotelId(@PathVariable("hotelId") Long hotelId) {
+	//@GetMapping(value = "/get-rating/{hotelId}")
+	@GetMapping(value = "/get-rating")
+	//public ResponseEntity<RatingCommonResponse> getSingleRatingByHotelId(@PathVariable("hotelId") Long hotelId) {
+
+	public ResponseEntity<RatingCommonResponse> getSingleRatingByHotelId(@RequestParam(name = "hotelId") Long hotelId) {
 		RatingCommonResponse ratingResponse = new RatingCommonResponse();
 		try {
-			RatingModel singleHotel = ratingService.getRatinngByHotelId(hotelId);
+			System.out.println("The hotel id is ::" + hotelId);
+			List<RatingModel> hotelListDetailsByHotelId = ratingService.getRatinngByHotelId(hotelId);
 			ratingResponse.setStatusCode("200");
-			ratingResponse.setResponseMessage("User detail fetched successfully");
-			ratingResponse.setResponseData(singleHotel);
+			ratingResponse.setResponseMessage("Rating details fetched successfully");
+			ratingResponse.setResponseData(hotelListDetailsByHotelId);
 
 		} catch (Exception e) {
 			ratingResponse.setStatusCode("500");
-			ratingResponse.setResponseMessage("Exception in fetching User detail");
-			ratingResponse.setResponseData(e);
+			ratingResponse.setResponseMessage("Exception in fetching hotel detail");
+			ratingResponse.setResponseData("Exception in fetching hotel detail");
 		}
 		return ResponseEntity.ok(ratingResponse);
 
 	}
-	
+
 	@GetMapping(value = "/get-rating/{userId}")
 	public ResponseEntity<RatingCommonResponse> getSingleRatingByUserlId(@PathVariable("userId") Long userId) {
 		RatingCommonResponse ratingResponse = new RatingCommonResponse();
 		try {
-			RatingModel singleHotel = ratingService.getRatingByUserId(userId);
+			List<RatingModel> hotelListDetailsByUserId = ratingService.getRatingByUserId(userId);
 			ratingResponse.setStatusCode("200");
-			ratingResponse.setResponseMessage("User detail fetched successfully");
-			ratingResponse.setResponseData(singleHotel);
+			ratingResponse.setResponseMessage("Rating details fetched successfully");
+			ratingResponse.setResponseData(hotelListDetailsByUserId);
 
 		} catch (Exception e) {
 			ratingResponse.setStatusCode("500");
-			ratingResponse.setResponseMessage("Exception in fetching User detail");
-			ratingResponse.setResponseData(e);
+			ratingResponse.setResponseMessage("Exception in fetching hotel detail");
+			ratingResponse.setResponseData("User id not found!!Please enter correct userId");
 		}
 		return ResponseEntity.ok(ratingResponse);
 

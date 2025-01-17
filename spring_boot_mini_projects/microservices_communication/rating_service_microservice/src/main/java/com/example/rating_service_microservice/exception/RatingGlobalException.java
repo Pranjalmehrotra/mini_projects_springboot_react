@@ -8,8 +8,8 @@ import com.example.rating_service_microservice.model.RatingCommonResponse;
 @RestControllerAdvice
 public class RatingGlobalException {
 
-	@ExceptionHandler(HotelNotFoundException.class)
-	public ResponseEntity<RatingCommonResponse> handleRespourceNotFoundException(HotelNotFoundException ex) {
+	@ExceptionHandler(RatingNotFoundException.class)
+	public ResponseEntity<RatingCommonResponse> handleRespourceNotFoundException(RatingNotFoundException ex) {
 		RatingCommonResponse ratingErrorReponse = new RatingCommonResponse();
 		ratingErrorReponse.setResponseMessage(ex.getMessage());
 		ratingErrorReponse.setStatusCode(String.valueOf(HttpStatus.NOT_FOUND.value()));

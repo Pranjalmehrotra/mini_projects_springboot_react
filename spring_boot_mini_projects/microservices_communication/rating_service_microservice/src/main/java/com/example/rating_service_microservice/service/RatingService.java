@@ -10,9 +10,9 @@ public interface RatingService {
 	
 	public List<RatingModel> getAllRatings();
 	
-	public RatingModel getRatingByUserId(Long userId);
+	public List<RatingModel> getRatingByUserId(Long userId);
 	
-	public RatingModel getRatinngByHotelId(Long hotelId);
+	public List<RatingModel> getRatinngByHotelId(Long hotelId);
 	
 
 }

@@ -26,17 +26,17 @@ public class HotelController {
 			if (!ObjectUtils.isEmpty(hotelModel)) {
 				HotelModel newUserModel = hotelService.addNewHotel(hotelModel);
 				createNewHotelResponse.setStatusCode("201");
-				createNewHotelResponse.setResponseMessage("User Created Successfully");
+				createNewHotelResponse.setResponseMessage("hotel Created Successfully");
 				createNewHotelResponse.setResponseData(newUserModel);
 
 			} else {
 				createNewHotelResponse.setStatusCode("500");
-				createNewHotelResponse.setResponseMessage("User not created!Please enter details in correct format");
+				createNewHotelResponse.setResponseMessage("hotel not created!Please enter details in correct format");
 				createNewHotelResponse.setResponseData(null);
 			}
 		} catch (Exception e) {
 			createNewHotelResponse.setStatusCode("500");
-			createNewHotelResponse.setResponseMessage("Exception in creating the user!!");
+			createNewHotelResponse.setResponseMessage("Exception in creating the hotel details!!");
 			createNewHotelResponse.setResponseData(e);
 		}
 		return ResponseEntity.ok(createNewHotelResponse);
@@ -51,17 +51,17 @@ public class HotelController {
 			if (!ObjectUtils.isEmpty(hotelModel)) {
 				HotelModel newHotelModel = hotelService.updateHotel(hotelModel, hotelId);
 				updatingHotelResponse.setStatusCode("200");
-				updatingHotelResponse.setResponseMessage("User Updated Successfully");
+				updatingHotelResponse.setResponseMessage("hotel Updated Successfully");
 				updatingHotelResponse.setResponseData(newHotelModel);
 
 			} else {
 				updatingHotelResponse.setStatusCode("500");
-				updatingHotelResponse.setResponseMessage("User details not updated!Please enter details in correct format");
+				updatingHotelResponse.setResponseMessage("hotel details not updated!Please enter details in correct format");
 				updatingHotelResponse.setResponseData(null);
 			}
 		} catch (Exception e) {
 			updatingHotelResponse.setStatusCode("500");
-			updatingHotelResponse.setResponseMessage("Exception in updating the user details!!");
+			updatingHotelResponse.setResponseMessage("Exception in updating the hotel details!!");
 			updatingHotelResponse.setResponseData(e);
 		}
 		return ResponseEntity.ok(updatingHotelResponse);
