@@ -70,6 +70,7 @@ public class HotelServiceImpl implements HotelService {
 		hotelModel.setHotelDescription(hotelEntity.getHotelDescription());
 		hotelModel.setHotelLocation(hotelEntity.getHotelLocation());
 		hotelModel.setHotelName(hotelEntity.getHotelName());
+		hotelModel.setHotelId(hotelEntity.getHotelId());
 		return hotelModel;
 
 	}

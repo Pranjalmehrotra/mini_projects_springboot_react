@@ -5,16 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.user_service_microservice.model.UserCommonResponse;
 import com.example.user_service_microservice.model.UserModel;
 import com.example.user_service_microservice.service.UserService;
 
 @RestController
+
+@RequestMapping("/users")
 public class UserControllerMicroservices {
 
 	@Autowired
@@ -48,7 +52,6 @@ public class UserControllerMicroservices {
 
 	}
 
-	//@PostMapping(value = "/update-user/{userId}")
 	@PatchMapping(value = "/update-user/{userId}")
 	public ResponseEntity<UserCommonResponse> updateUser(@RequestBody UserModel userModel, @PathVariable("userId") Long userId) {
 		UserCommonResponse updatingUserResponse = new UserCommonResponse();
@@ -109,7 +112,7 @@ public class UserControllerMicroservices {
 
 	}
 	
-	@PostMapping(value = "/get-user/{userId}")
+	@GetMapping(value = "/get-user/{userId}")
 	public ResponseEntity<UserCommonResponse> singleUserByUserId(@PathVariable("userId")Long userId) {
 		UserCommonResponse userListResponse = new UserCommonResponse();
 		try {

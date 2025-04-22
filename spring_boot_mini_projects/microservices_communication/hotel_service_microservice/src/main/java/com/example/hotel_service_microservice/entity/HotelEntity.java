@@ -1,4 +1,5 @@
 package com.example.hotel_service_microservice.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "HotelEntity")
 @Table(name = "hotel_info_tbl")
 public class HotelEntity {
 
@@ -25,8 +26,6 @@ public class HotelEntity {
 	private String hotelDescription;
 
 	public HotelEntity() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public HotelEntity(Long hotelId, String hotelName, String hotelLocation, String hotelDescription) {

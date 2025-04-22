@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "RatingEntity")
 @Table(name = "rating_entity_tbl")
 public class RatingEntity {
 
@@ -29,8 +29,7 @@ public class RatingEntity {
 	private String feedBack;
 
 	public RatingEntity() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public RatingEntity(Long ratingId, Long userId, Long hotelId, Integer rating, String feedBack) {

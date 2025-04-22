@@ -1,12 +1,19 @@
 package com.example.user_service_microservice.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.user_service_microservice.model.RatingModel;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
-@Entity
+@Entity(name = "UserEntity")
 @Table(name = "user_info_tbl")
 public class UserEntity {
 
@@ -27,20 +34,21 @@ public class UserEntity {
 	@Column(name = "last_name")
 	private String lastName;
 
-	public UserEntity() {
-	}
+	@Transient
+	private List<RatingModel> userRatingModelList = new ArrayList<>();
 
-	public UserEntity(Long userId, String userEmail, String userSummary, String firstName, String lastName) {
+	public UserEntity(Long userId, String userEmail, String userSummary, String firstName, String lastName,
+			List<RatingModel> userRatingModelList) {
 		super();
 		this.userId = userId;
 		this.userEmail = userEmail;
 		this.userSummary = userSummary;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.userRatingModelList = userRatingModelList;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public UserEntity() {
 	}
 
 	public void setUserId(Long userId) {
@@ -79,9 +87,19 @@ public class UserEntity {
 		this.lastName = lastName;
 	}
 
+	public List<RatingModel> getUserRatingModelList() {
+		return userRatingModelList;
+	}
+
+	public void setUserRatingModelList(List<RatingModel> userRatingModelList) {
+		this.userRatingModelList = userRatingModelList;
+	}
+
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", userEmail=" + userEmail + ", userSummary=" + userSummary
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", userRatingModelList=" + userRatingModelList
+				+ "]";
 	}
+
 }

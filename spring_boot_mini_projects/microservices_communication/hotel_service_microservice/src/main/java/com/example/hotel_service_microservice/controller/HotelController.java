@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.hotel_service_microservice.model.HotelCommonResponse;
 import com.example.hotel_service_microservice.model.HotelModel;
 import com.example.hotel_service_microservice.service.HotelService;
 
 @RestController
+@RequestMapping("/hotels")
 public class HotelController {
 	
 	@Autowired
@@ -110,12 +112,12 @@ public class HotelController {
 		try {
 			HotelModel singleHotel = hotelService.getHotelByHotelId(hotelId);
 			hotelListResponse.setStatusCode("200");
-			hotelListResponse.setResponseMessage("User detail fetched successfully");
+			hotelListResponse.setResponseMessage("Hotel detail fetched successfully");
 			hotelListResponse.setResponseData(singleHotel);
 
 		} catch (Exception e) {
 			hotelListResponse.setStatusCode("500");
-			hotelListResponse.setResponseMessage("Exception in fetching User detail");
+			hotelListResponse.setResponseMessage("Exception in fetching Hotel detail");
 			hotelListResponse.setResponseData(e);
 		}
 		return ResponseEntity.ok(hotelListResponse);

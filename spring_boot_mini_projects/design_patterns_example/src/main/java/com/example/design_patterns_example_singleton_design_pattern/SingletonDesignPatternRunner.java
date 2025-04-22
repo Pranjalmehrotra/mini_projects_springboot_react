@@ -11,9 +11,9 @@ public class SingletonDesignPatternRunner {
 		System.out.println("The hashcode of the singleOne is ::" + singleOne.hashCode());
 		System.out.println("The hashcode of the singleOne is ::" + singleTwo.hashCode());
 		
-		SingletonDesignPattern singleOneEager = 	SingletonDesignPattern.getObjectEagerWay();
-		SingletonDesignPattern singleTwoEager = 	SingletonDesignPattern.getObjectEagerWay();
-		SingletonDesignPattern singleThreeEager = 	SingletonDesignPattern.getObjectEagerWay();
+		SingletonDesignPattern singleOneEager = SingletonDesignPattern.getObjectEagerWay();
+		SingletonDesignPattern singleTwoEager = SingletonDesignPattern.getObjectEagerWay();
+		SingletonDesignPattern singleThreeEager = SingletonDesignPattern.getObjectEagerWay();
 
 		
 		System.out.println("The hashcode of the singleOneEager is ::" + singleOneEager.hashCode());

@@ -14,13 +14,13 @@ public class UserModel {
 	private String userFirstName;
 	@JsonProperty("userLastName")
 	private String userLastName;
-	private List<UserRatingModel> userRating = new ArrayList<>();
+	private List<RatingModel> userRating = new ArrayList<>();
 
 	public UserModel() {
 	}
 
 	public UserModel(String userEmail, String userSummary, String userFirstName, String userLastName,
-			List<UserRatingModel> userRating) {
+			List<RatingModel> userRating) {
 		super();
 		this.userEmail = userEmail;
 		this.userSummary = userSummary;
@@ -61,11 +61,11 @@ public class UserModel {
 		this.userLastName = userLastName;
 	}
 
-	public List<UserRatingModel> getUserRating() {
+	public List<RatingModel> getUserRating() {
 		return userRating;
 	}
 
-	public void setUserRating(List<UserRatingModel> userRating) {
+	public void setUserRating(List<RatingModel> userRating) {
 		this.userRating = userRating;
 	}
 

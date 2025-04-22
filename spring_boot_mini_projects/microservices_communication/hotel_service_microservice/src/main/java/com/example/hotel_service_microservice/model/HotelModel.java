@@ -8,16 +8,25 @@ public class HotelModel {
 
 	private String hotelDescription;
 
+	private Long hotelId;
+
 	public HotelModel() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public HotelModel(String hotelName, String hotelLocation, String hotelDescription) {
+	public HotelModel(String hotelName, String hotelLocation, String hotelDescription, Long hotelId) {
 		super();
 		this.hotelName = hotelName;
 		this.hotelLocation = hotelLocation;
 		this.hotelDescription = hotelDescription;
+		this.hotelId = hotelId;
+	}
+
+	public Long getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
 	}
 
 	public void setHotelName(String hotelName) {

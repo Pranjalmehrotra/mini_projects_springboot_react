@@ -1,4 +1,5 @@
 package com.example.rating_service_microservice.service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -12,10 +13,9 @@ import com.example.rating_service_microservice.repository.RatingRepository;
 
 @Service
 public class RatingServiceImpl implements RatingService {
-	
-	private  Logger ratingLogger =  
-           LoggerFactory.getLogger(RatingServiceImpl.class);
-	
+
+	private Logger ratingLogger = LoggerFactory.getLogger(RatingServiceImpl.class);
+
 	@Autowired
 	RatingRepository ratingRepository;
 
